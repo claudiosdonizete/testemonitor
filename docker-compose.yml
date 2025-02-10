@@ -1,0 +1,31 @@
+version: "3"
+services:
+  backend-monitoramento-contabilizacao-folha:
+    restart: always
+    container_name : backend-monitoramento-contabilizacao-folha
+    build: .
+    command: "npm run dev"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=dev
+    expose:
+      - "8080"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo
+  mongo:
+    restart: always
+    container_name : mongo-agile-notfy
+    image: mongo:6
+    #environment:
+    #  MONGO_INITDB_ROOT_USERNAME: ADMIN
+    #  MONGO_INITDB_ROOT_PASSWORD: "@d1M1in@2024"
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo_db:/data/db
+volumes:
+  mongo_db: {}
+    
+
